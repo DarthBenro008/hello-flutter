@@ -18,6 +18,36 @@ void main() {
 class DicePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: <Widget>[
+        Text(
+          'Welcome to Dice Decider',
+          style: TextStyle(
+            fontSize: 32,
+            color: Colors.white,
+          ),
+        ),
+        SizedBox(
+          height: 20,
+        ),
+        Row(
+          children: <Widget>[
+            Expanded(
+              child: FlatButton(
+                onPressed: () {},
+                child: Image.asset('images/dice1.png'),
+              ),
+            ),
+            Expanded(
+              child: FlatButton(
+                onPressed: () {},
+                child: Image.asset('images/dice2.png'),
+              ),
+            ),
+          ],
+        ),
+      ],
+    );
   }
 }
