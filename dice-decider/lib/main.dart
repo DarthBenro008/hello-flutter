@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'dart:math';
 
 void main() {
   return runApp(
@@ -6,7 +7,7 @@ void main() {
       home: Scaffold(
         backgroundColor: Colors.red,
         appBar: AppBar(
-          title: Text('Dicee'),
+          title: Text('DiceDecider'),
           backgroundColor: Colors.red,
         ),
         body: DicePage(),
@@ -15,7 +16,14 @@ void main() {
   );
 }
 
-class DicePage extends StatelessWidget {
+class DicePage extends StatefulWidget {
+  @override
+  _DicePageState createState() => _DicePageState();
+}
+
+class _DicePageState extends State<DicePage> {
+  int leftDice = 1;
+  int rightDice = 6;
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -24,7 +32,7 @@ class DicePage extends StatelessWidget {
         Text(
           'Welcome to Dice Decider',
           style: TextStyle(
-            fontSize: 32,
+            fontSize: 18,
             color: Colors.white,
           ),
         ),
@@ -35,18 +43,50 @@ class DicePage extends StatelessWidget {
           children: <Widget>[
             Expanded(
               child: FlatButton(
-                onPressed: () {},
-                child: Image.asset('images/dice1.png'),
+                onPressed: () {
+                  setState(() {
+                    leftDice = Random().nextInt(6) + 1;
+                  });
+                },
+                child: Image.asset('images/dice$leftDice.png'),
               ),
             ),
             Expanded(
               child: FlatButton(
-                onPressed: () {},
-                child: Image.asset('images/dice2.png'),
+                onPressed: () {
+                  setState(() {
+                    rightDice = Random().nextInt(6) + 1;
+                  });
+                },
+                child: Image.asset('images/dice$rightDice.png'),
               ),
             ),
           ],
         ),
+        SizedBox(
+          height: 20,
+        ),
+        RaisedButton(
+          onPressed: () {
+            setState(() {
+              leftDice = Random().nextInt(6) + 1;
+              rightDice = Random().nextInt(6) + 1;
+            });
+          },
+          child: Text(
+            'Randomise Both Dice',
+            style: TextStyle(
+              fontSize: 16,
+            ),
+          ),
+          color: Colors.white,
+        ),
+        Text(
+          'The Sum of the dice are ${leftDice + rightDice}',
+          style: TextStyle(
+            color: Colors.white,
+          ),
+        )
       ],
     );
   }
